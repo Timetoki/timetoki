@@ -2,7 +2,7 @@
    样例先接「贩售机」，验证观感后把更多入口加进 MODAL 即可。 */
 (function(){
   var MODAL = ['vending_machine.html','logs.html','operator_notes.html','specimen_room.html',
-    'museum.html','about.html','errorlog.html','portfolio.html','news.html','corrupted_archive.html',
+    'museum.html','about.html','portfolio.html','news.html','corrupted_archive.html',
     'call-0417.html','call-0603.html','call-0912.html','call-2258.html','hotline.html'];
 
   var mask=document.createElement('div'); mask.className='xp-mask'; document.body.appendChild(mask);
@@ -30,8 +30,8 @@
     modal.classList.add('open'); mask.classList.add('open');
     if(window.Achievements){
       var base=url.split('/').pop();
-      if(base==='corrupted_archive.html'||base==='errorlog.html'){
-        window.Achievements.visit(base, ['corrupted_archive.html','errorlog.html'], 'archive-digger');
+      if(base==='corrupted_archive.html'){
+        window.Achievements.visit(base, ['corrupted_archive.html'], 'archive-digger');
       }
       if(/^call-/.test(base)){
         window.Achievements.visit(base, ['call-0417.html','call-0603.html','call-0912.html','call-2258.html'], 'hotline-completionist');
@@ -617,7 +617,7 @@
   /* 直达子页面→跳主页后，读取 ?open= 自动弹窗 */
   var TITLES={ 'logs.html':'来电归档','operator_notes.html':'接线员手记','specimen_room.html':'标本室',
     'museum.html':'博物馆','about.html':'关于本站','vending_machine.html':'5-羟色胺自动贩售机',
-    'errorlog.html':'错误日志','portfolio.html':'作品集','news.html':'媒体 · 新闻','corrupted_archive.html':'损坏档案',
+    'portfolio.html':'作品集','news.html':'媒体 · 新闻','corrupted_archive.html':'损坏档案',
     'call-0417.html':'call-0417','call-0603.html':'call-0603','call-0912.html':'call-0912','call-2258.html':'call-2258',
     'hotline.html':'+86自杀援助热线接线中心' };
   (function(){

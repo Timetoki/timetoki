@@ -597,7 +597,8 @@ body.desktop .chips.soft .chip{ font-size:15px;padding:3px 11px; }
     radial-gradient(var(--pink) 2.2px, transparent 2.3px),
     radial-gradient(var(--blue) 1.6px, transparent 1.7px) !important;
   background-size:26px 26px, 26px 26px !important;
-  background-position:0 0, 13px 13px !important; }
+  background-position:0 0, 13px 13px !important;
+  background-attachment:local !important; }
 .xp-modal.game{ width:min(1040px,96vw); }
 .xp-modal.game.open{ height:94vh !important; }
 .xp-modal.game .game-frame{ height:100% !important; }

@@ -4,8 +4,8 @@
 
   /* ---------- 左侧快捷方式（已排除顶部导航里已有的项）---------- */
   var DOCK = [
-    {label:"错误日志", href:"errorlog.html",        icon:"icons/largeicons/blog2.png"},
-    {label:"作品集",   href:"portfolio.html",        icon:"icons/largeicons/Portfolio.png"},
+    {label:"占卜",     href:"#divination",           icon:"icons/largeicons/MSN.png",   id:"nav-divination"},
+    {label:"游戏",     href:"#games",                icon:"icons/largeicons/Games.png", id:"nav-games"},
     {label:"贩售机",   href:"vending_machine.html",  icon:"icons/px/icon1.png"},
     {label:"新闻",     href:"news.html",             icon:"icons/largeicons/Media.png"},
     {label:"电话机",   href:"hotline.html",           icon:"icons/px/Telephone.png"},
@@ -31,6 +31,7 @@
   DOCK.forEach(function(d){
     var a = document.createElement('a');
     a.href = d.href;
+    if (d.id) a.id = d.id;
     if (d.ext){ a.target = '_blank'; a.rel = 'noopener'; }
     a.innerHTML = '<img src="'+d.icon+'" alt="">'+d.label;
     dock.appendChild(a);
