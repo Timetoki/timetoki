@@ -43,6 +43,7 @@
   var badge = document.getElementById('chatBadge');
   var stat = qq.querySelector('#qqStat');
   var unread = 0, greeted = false, idleTimer = null, busy = false;
+  var openedAt = 0, typedThisSession = false;
 
   function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
   function scroll(){ body.scrollTop = body.scrollHeight; }
@@ -99,6 +100,7 @@
 
   function userSend(){
     var v=input.value.trim(); if(!v) return;
+    typedThisSession = true;
     input.value=''; addMe(v); resetIdle();
     if (!busy) setTimeout(function(){ replyTo(v); }, 400);
   }
@@ -115,10 +117,17 @@
     qq.classList.add('open'); qq.classList.remove('min');
     launch.style.display='none';
     unread=0; renderBadge();
+    openedAt = Date.now(); typedThisSession = false;
     if (!greeted){ greeted=true; typing(function(){ addHer(rand(C.greetings)); }); }
     resetIdle(); input.focus();
   }
-  function closeChat(){ qq.classList.remove('open'); launch.style.display='flex'; }
+  function closeChat(){
+    if (openedAt && !typedThisSession && (Date.now()-openedAt)>=30000 && window.Achievements){
+      window.Achievements.unlock('qq-ghost');
+    }
+    openedAt = 0;
+    qq.classList.remove('open'); launch.style.display='flex';
+  }
 
   launch.addEventListener('click', openChat);
   qq.querySelector('.cls').addEventListener('click', closeChat);

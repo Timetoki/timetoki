@@ -38,6 +38,15 @@
   });
   document.body.appendChild(dock);
 
+  /* “开始”按钮：点了也不会发生什么 */
+  var xstart = document.querySelector('.xstart');
+  if(xstart){
+    xstart.style.cursor = 'pointer';
+    xstart.addEventListener('click', function(){
+      if(window.Achievements) window.Achievements.bump('falseStarts', 5, 'false-start');
+    });
+  }
+
   /* 移动端：dock 抽屉把手（PC 端 CSS 里隐藏） */
   var dockHandle=document.createElement('button');
   dockHandle.className='dock-handle'; dockHandle.setAttribute('aria-label','菜单'); dockHandle.textContent='≡';
@@ -136,7 +145,10 @@
 
   audio.addEventListener('play',  function(){ spin(true);  setPlayIcon(); });
   audio.addEventListener('pause', function(){ spin(false); setPlayIcon(); });
-  audio.addEventListener('ended', function(){ load(i+1); audio.play(); });
+  audio.addEventListener('ended', function(){
+    if(window.Achievements) window.Achievements.unlock('full-listen');
+    load(i+1); audio.play();
+  });
   audio.addEventListener('error', function(){ spin(false); setPlayIcon(); scr.textContent = '缺唱片：' + PLAYLIST[i].title; });
 
   audio.addEventListener('loadedmetadata', function(){ tdur.textContent = fmt(audio.duration); });
@@ -147,7 +159,10 @@
   });
   seek.addEventListener('input',  function(){ seeking = true; if(audio.duration) tcur.textContent = fmt(seek.value/1000*audio.duration); });
   seek.addEventListener('change', function(){ if(audio.duration) audio.currentTime = seek.value/1000*audio.duration; seeking = false; });
-  vol.addEventListener('input',   function(){ audio.volume = vol.value/100; });
+  vol.addEventListener('input',   function(){
+    audio.volume = vol.value/100;
+    if(+vol.value===0 && window.Achievements) window.Achievements.unlock('silent-treatment');
+  });
 
   /* 供游戏/占卜调用：打开暂停、关闭恢复到原状态 */
   window.__player = {

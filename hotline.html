@@ -124,6 +124,14 @@
         while(arr.length>50) arr.shift();
         localStorage.setItem('user_pain_submissions', JSON.stringify(arr));
       }catch(e){}
+      try{
+        var today=new Date().toISOString().slice(0,10);
+        var daily=JSON.parse(localStorage.getItem('hotline_daily')||'null');
+        if(!daily || daily.date!==today) daily={date:today, count:0};
+        daily.count++;
+        localStorage.setItem('hotline_daily', JSON.stringify(daily));
+        if(daily.count>=5 && window.Achievements) window.Achievements.unlock('hotline-regular');
+      }catch(e){}
       sayCaller(v);
       input.value='';
       setTimeout(function(){

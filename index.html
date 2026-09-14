@@ -192,6 +192,7 @@
   chips.forEach(function(el){
     el.addEventListener('click',function(){
       el.classList.add('pop');
+      if(window.Achievements) window.Achievements.bump('wallChipClicks', 15, 'wall-clicker');
       setTimeout(function(){
         var busy=shown(el);
         var cur=el.dataset.full || el.textContent;

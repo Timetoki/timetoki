@@ -17,6 +17,7 @@
   document.body.appendChild(modal);
 
   function close(){ modal.classList.remove('open','game','answerbook'); mask.classList.remove('open');
+    document.querySelectorAll('.xp-fall-coin,.xp-fall-item,.xp-piled').forEach(function(n){n.remove();});
     if(window.__player) window.__player.resume(); }
   mask.addEventListener('click',close);
   document.getElementById('xpmcls').addEventListener('click',close);
@@ -35,6 +36,12 @@
       }
       if(/^call-/.test(base)){
         window.Achievements.visit(base, ['call-0417.html','call-0603.html','call-0912.html','call-2258.html'], 'hotline-completionist');
+        try{
+          var seen=JSON.parse(localStorage.getItem('call_open_counts')||'{}');
+          seen[base]=(seen[base]||0)+1;
+          localStorage.setItem('call_open_counts', JSON.stringify(seen));
+          if(seen[base]>=2) window.Achievements.unlock('replay-the-same-call');
+        }catch(e){}
       }
     }
     fetch(url).then(function(r){return r.text();}).then(function(html){
@@ -46,6 +53,7 @@
       bindVending(body);
       bindHotline(body);
       bindPortfolio(body);
+      bindOperatorNotes(body);
       if(window.Achievements) window.Achievements.render();
     }).catch(function(){ body.innerHTML='数据已???完好，请刷新。'; });
   }
@@ -55,8 +63,11 @@
     var vm=scope.querySelector('#vm'); if(!vm && !scope.querySelector('.vitem')) return;
     var floating=0, pile=[];
     function dropCoin(){
-      if(floating>=7) return; floating++;
-      if(window.Achievements) window.Achievements.bump('vendingCoins', 10, 'vending-broke');
+      floating++;
+      if(window.Achievements){
+        window.Achievements.bump('vendingCoins', 10, 'vending-broke');
+        if(floating>=10) window.Achievements.unlock('vending-flood');
+      }
       var img=document.createElement('img');
       img.src='pictures/assets/c.gif'; img.className='xp-fall-coin';
       img.style.left=(10+Math.random()*80)+'vw';
@@ -83,6 +94,20 @@
     scope.querySelectorAll('.vitem:not(.out)').forEach(function(btn){
       btn.addEventListener('click',function(e){ dropItem(btn.getAttribute('data-icon'), e.clientX); });
     });
+  }
+
+  /* 接线员工作守则：滚到第 12 条末尾才算读完（弹窗剥离了原页脚本，需在此重挂） */
+  function bindOperatorNotes(scope){
+    var closing=scope.querySelector('.closing'); if(!closing) return;
+    function check(){
+      var r=closing.getBoundingClientRect(), sr=scope.getBoundingClientRect();
+      if(r.bottom<=sr.bottom+40){
+        if(window.Achievements) window.Achievements.unlock('read-the-fine-print');
+        scope.removeEventListener('scroll', check);
+      }
+    }
+    scope.addEventListener('scroll', check);
+    check();
   }
 
   /* 作品集：分类切换 + 板绘轮播 + 文字全文阅读（弹窗剥离了原页脚本，需在此重挂） */
@@ -348,6 +373,14 @@
         arr.push(v);
         while(arr.length>50) arr.shift();
         localStorage.setItem('user_pain_submissions', JSON.stringify(arr));
+      }catch(e){}
+      try{
+        var today=new Date().toISOString().slice(0,10);
+        var daily=JSON.parse(localStorage.getItem('hotline_daily')||'null');
+        if(!daily || daily.date!==today) daily={date:today, count:0};
+        daily.count++;
+        localStorage.setItem('hotline_daily', JSON.stringify(daily));
+        if(daily.count>=5 && window.Achievements) window.Achievements.unlock('hotline-regular');
       }catch(e){}
       sayCaller(v);
       input.value='';

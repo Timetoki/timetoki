@@ -95,11 +95,14 @@
 <script>
 (function(){
   var COIN='pictures/assets/c.gif';
-  var floating=0;        // 天上飘落的硬币计数（同屏≤7）
+  var floating=0;        // 天上飘落的硬币计数（同屏并发数，用于成就判定）
   var pile=[];           // 底部堆叠的商品图标
   function dropCoin(){
-    if(floating>=7) return;
     floating++;
+    if(window.Achievements){
+      window.Achievements.bump('vendingCoins', 10, 'vending-broke');
+      if(floating>=10) window.Achievements.unlock('vending-flood');
+    }
     var img=document.createElement('img');
     img.src=COIN; img.className='falling-coin';
     img.style.left=(10+Math.random()*80)+'vw';

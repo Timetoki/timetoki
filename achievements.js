@@ -71,6 +71,16 @@
     saveJSON(UKEY, unlocked);
     queue.push(a); playNext();
     renderGrid();
+    checkCompletionist();
+  }
+  /* 元成就：其余成就全部解锁后自动解锁 */
+  function checkCompletionist(){
+    if(!BYID['completionist'] || unlocked['completionist']) return;
+    for(var i=0;i<LIST.length;i++){
+      if(LIST[i].id==='completionist') continue;
+      if(!unlocked[LIST[i].id]) return;
+    }
+    unlock('completionist');
   }
   function bump(key, threshold, id){
     if(unlocked[id]) return;
