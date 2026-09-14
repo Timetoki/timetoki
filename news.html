@@ -7,8 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>♡ 媒体 · 新闻 ♡</title>
 <link rel="stylesheet" href="sweet.css">
+</head>
+<body>
+<div class="wrap">
 <style>
-  /* 新闻条目：白色方框卡片，去掉便签的歪斜与糖果色阴影 */
+  /* 新闻条目：白色方框卡片，去掉便签的歪斜与糖果色阴影。
+     注意：本站导航会把 .wrap 的内容直接搬进弹窗，<head> 不会
+     被带走，所以这段 <style> 必须放在 .wrap 内部才会生效。 */
   .note-doc{
     background:#fff; border:1px solid #dcdce0; border-radius:3px;
     padding:16px 20px; margin:20px 0; box-shadow:0 1px 2px rgba(0,0,0,.04);
@@ -23,9 +28,6 @@
     transform:none; display:block; margin:0 0 8px;
   }
 </style>
-</head>
-<body>
-<div class="wrap">
   <div class="doodle-layer" aria-hidden="true">
     <span class="doodle star-yellow tw" style="top:60px;left:4px;width:34px;height:34px;"></span>
     <span class="doodle heart-pink tw" style="top:20px;right:12px;width:40px;height:38px;"></span>
