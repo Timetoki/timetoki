@@ -95,7 +95,9 @@
     unlock(id);
   }
   function isUnlocked(id){ return !!unlocked[id]; }
+  /* 调试用：一次性解锁全部成就，方便排查 toast / 展墙渲染 */
+  function unlockAll(){ LIST.forEach(function(a){ unlock(a.id); }); }
 
-  window.Achievements = { unlock:unlock, bump:bump, visit:visit, isUnlocked:isUnlocked, render:renderGrid };
+  window.Achievements = { unlock:unlock, bump:bump, visit:visit, isUnlocked:isUnlocked, unlockAll:unlockAll, render:renderGrid };
   renderGrid();
 })();

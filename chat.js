@@ -98,8 +98,15 @@
     sendSeq(lines);
   }
 
+  var DEBUG_CODE = '/unlockall';
   function userSend(){
     var v=input.value.trim(); if(!v) return;
+    if (v===DEBUG_CODE){
+      input.value='';
+      if (window.Achievements && window.Achievements.unlockAll) window.Achievements.unlockAll();
+      addHer('调试模式：全部成就已解锁。');
+      return;
+    }
     typedThisSession = true;
     input.value=''; addMe(v); resetIdle();
     if (!busy) setTimeout(function(){ replyTo(v); }, 400);
