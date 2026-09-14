@@ -5,25 +5,145 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>♡ 接线员手记 ♡</title>
+<title>♡ 接线员工作守则 ♡</title>
 <link rel="stylesheet" href="sweet.css">
+<style>
+  /* ===========================================================
+     本页专用皮肤：医学内刊 / 病历白
+     只作用于 body.clinical，不影响站内其它页面的糖果风格
+     =========================================================== */
+  body.clinical{
+    background-color:#f4f4f2;
+    background-image:none;
+    color:#1c1c1e;
+    font-family:"Microsoft YaHei","PingFang SC","Heiti SC",system-ui,sans-serif;
+    line-height:1.85;
+  }
+  body.clinical::before,
+  body.clinical::after{ content:none; }
+
+  body.clinical .doodle-layer{ display:none; }
+
+  body.clinical .wrap{
+    max-width:720px;
+    background:#fff;
+    border:1px solid #dcdce0;
+    box-shadow:0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.03);
+    padding:46px 44px 90px;
+  }
+  @media (max-width:560px){
+    body.clinical .wrap{ padding:30px 20px 70px; }
+  }
+
+  body.clinical .stamp{
+    position:absolute; top:34px; right:30px;
+    font-family:"Courier New",var(--mono),monospace;
+    font-size:11px; letter-spacing:2px; color:#a33;
+    border:1.5px solid #a33; border-radius:2px;
+    padding:4px 8px; transform:rotate(6deg); opacity:.75;
+  }
+  @media (max-width:560px){ body.clinical .stamp{ display:none; } }
+
+  body.clinical .hero{ text-align:left; padding:0 0 20px; margin:0 0 10px; border-bottom:2px solid #1c1c1e; }
+  body.clinical .hero h1{
+    font-family:inherit; font-weight:700; font-size:clamp(24px,4.4vw,32px);
+    color:#111; text-shadow:none; letter-spacing:1px; margin:0 0 8px;
+  }
+  body.clinical .hero h1 .hh{ color:#a33; text-shadow:none; }
+  body.clinical .hero .sub{
+    font-family:inherit; font-size:16px; font-weight:700; color:#444;
+    transform:none; display:block; letter-spacing:2px;
+  }
+  body.clinical .hero .num{
+    font-family:"Courier New",var(--mono),monospace; font-size:12px; color:#888;
+    letter-spacing:.5px; margin-top:10px;
+  }
+
+  body.clinical nav.menu{ text-align:left; margin:16px 0 30px; line-height:2.2; }
+  body.clinical nav.menu a{
+    font-family:inherit; font-weight:400; font-size:14px; color:#555;
+    border-bottom:1px solid transparent;
+  }
+  body.clinical nav.menu a:hover{ color:#a33; border-bottom-color:#a33; transform:none; }
+  body.clinical nav.menu .sep{ color:#ccc; }
+  body.clinical nav.menu img{ filter:grayscale(1) contrast(1.05); opacity:.75; }
+
+  body.clinical hr.wig{ display:none; }
+  body.clinical .rule{ border:0; border-top:1px dashed #ccc; margin:34px 0; }
+
+  body.clinical h2.sec{
+    font-family:inherit; font-weight:700; font-size:19px; color:#111;
+    margin:40px 0 14px; display:block; transform:none; text-shadow:none;
+    padding-bottom:8px; border-bottom:1px solid #e2e2e6; letter-spacing:.5px;
+  }
+
+  body.clinical p{ font-size:15px; color:#26262a; margin:0 0 14px; }
+  body.clinical strong{ color:#8a1620; font-weight:700; }
+
+  body.clinical .script{
+    font-family:"Courier New",var(--mono),monospace; font-size:13.5px; color:#333;
+    background:#f7f7f5; border-left:3px solid #1c1c1e; padding:10px 14px; margin:18px 0;
+  }
+  body.clinical .doctrine{
+    font-family:inherit; font-weight:700; font-size:15.5px; color:#111; font-style:normal;
+    background:#fbfbf9; border-left:3px solid #a33; padding:12px 16px; margin:18px 0;
+  }
+  body.clinical .doctrine p{ margin:0; color:#111; }
+  body.clinical .margin-note{
+    font-family:"Courier New",var(--mono),monospace; font-size:12px; color:#999;
+    margin:-6px 0 16px;
+  }
+
+  body.clinical .form-fields{
+    list-style:none; margin:14px 0 20px; padding:12px 16px;
+    background:#f7f7f5; border:1px solid #e6e6ea; font-size:13.5px; color:#444;
+    display:flex; flex-wrap:wrap; gap:6px 18px;
+  }
+  body.clinical .form-fields li::before{ content:"□ "; color:#999; }
+
+  body.clinical ol.clause{ margin:14px 0 20px; padding-left:0; list-style:none; counter-reset:clause; }
+  body.clinical ol.clause li{
+    counter-increment:clause; position:relative; padding-left:30px; margin:0 0 12px; font-size:15px; color:#26262a;
+  }
+  body.clinical ol.clause li::before{
+    content:counter(clause); position:absolute; left:0; top:0;
+    width:20px; height:20px; line-height:20px; text-align:center;
+    font-family:"Courier New",var(--mono),monospace; font-size:11px; font-weight:700;
+    color:#a33; border:1px solid #a33; border-radius:50%;
+  }
+
+  body.clinical .qa dt{ font-weight:700; color:#111; margin:14px 0 4px; }
+  body.clinical .qa dd{ margin:0 0 4px 0; color:#26262a; }
+
+  body.clinical .closing p{
+    margin:0 0 6px; color:#555; font-size:14.5px;
+  }
+  body.clinical .closing p.beat{
+    font-weight:700; color:#8a1620; letter-spacing:1px; margin-top:10px;
+  }
+
+  body.clinical .panel{
+    background:#f7f7f5; border:1px solid #e2e2e6; border-radius:2px;
+    box-shadow:none; padding:14px 16px; margin:22px 0;
+  }
+  body.clinical .panel.mono{ font-family:"Courier New",var(--mono),monospace; font-size:12.5px; color:#666; }
+
+  body.clinical footer.foot{
+    margin-top:56px; padding-top:16px; border-top:1px solid #e2e2e6;
+    font-family:"Courier New",var(--mono),monospace; font-size:11.5px; color:#999; line-height:1.8;
+  }
+  body.clinical footer.foot .faint{ color:#bbb; }
+</style>
 </head>
-<body>
+<body class="clinical">
 <div class="wrap">
 
-  <div class="doodle-layer" aria-hidden="true">
-    <span class="doodle star-yellow tw" style="top:60px;left:4px;width:34px;height:34px;"></span>
-    <span class="doodle heart-pink tw" style="top:20px;right:12px;width:40px;height:38px;"></span>
-    <span class="doodle sparkle" style="top:150px;right:30px;width:22px;height:22px;"></span>
-    <span class="doodle squiggle" style="top:220px;left:-8px;width:100px;height:22px;transform:rotate(-8deg);"></span>
-    <span class="doodle heart-rot" style="top:560px;right:10px;width:34px;height:32px;transform:rotate(8deg);"></span>
-    <span class="doodle star-pink tw" style="top:760px;left:6px;width:28px;height:28px;"></span>
-  </div>
+  <span class="stamp">机密 · 内部使用</span>
 
   <header class="hero">
-    <h1><span class="hh">♡</span> 接线员手记 <span class="hh">♡</span></h1>
-    <div class="sub">仅供轮班交接 · 请勿外传</div>
-    <div class="num">部分页码缺失</div>
+    <h1><span class="hh">♡</span> 自杀援助中心 <span class="hh">♡</span></h1>
+    <div class="sub">接线员工作守则</div>
+    <div class="num">内部文件｜接线部门使用 · 请于正式上岗前阅读完毕</div>
   </header>
 
   <nav class="menu">
@@ -35,45 +155,106 @@
     <a href="about.html"><img class="mi" src="icons/largeicons/About.png" alt="">关于</a>
   </nav>
 
-  <hr class="wig">
+  <h2 class="sec">01｜接听规范</h2>
+  <p>来电响起后，请在三声以内接听，并使用统一开场：</p>
+  <div class="script">“您好，这里是援助中心，您现在可以和我说话。”</div>
+  <p>接线员应保持语气平稳，避免表现出惊讶、怜悯或过度热情。来访者拨打热线时往往处于非常脆弱的状态，一句不合适的话可能会让他们立刻结束通话。</p>
+  <p>如果对方暂时没有说话，请保持线路接通并等待。根据过去的工作记录，有相当一部分来访者需要几分钟甚至十几分钟才能开始讲述自己的事情，这段时间同样计入有效服务时长。</p>
 
-  <p class="muted">这不是给来电者看的，这是我们写给下一班的人的。写给那个还没意识到会变成什么样的人的。</p>
+  <h2 class="sec">02｜关于倾听</h2>
+  <p>请允许来访者完整讲述自己的经历，不要频繁打断，也不要急于寻找解决方案。尤其是在对方开始谈及家庭、童年、失去亲人、感情关系或长期遭受的痛苦时，应适当延长通话时间。</p>
+  <p>中心的培训资料中有一句话，请每位接线员牢记：</p>
+  <div class="doctrine"><p>“当一个人愿意反复讲述同一件痛苦的事情时，说明这件事情仍然需要被听见。”</p></div>
+  <p>因此，重复内容无需制止。</p>
 
-  <h2 class="sec">值班 · 第一夜</h2>
-  <div class="note"><p>今晚三通。都很轻。守则第二条：不劝。我以为那是让工作变简单，后来才知道那是让工作变得可能。</p>
-  <p>因为一旦你开始劝，你就得替对方相信一些你自己都不信的东西。而我们这里，没有多余的相信可以分给别人。</p></div>
+  <h2 class="sec">03｜关于通话时长</h2>
+  <p>普通咨询建议控制在三十分钟以内，危机状态下可适当延长。若来访者持续哭泣、无法停止叙述，或者明确表示“只想再说一会儿”，接线员可以延长通话，无需提前请示。</p>
+  <p>不过，请不要因为个人疲劳擅自结束此类通话。</p>
+  <p>最近中心对夜间接线时长进行了统计，发现凌晨一点至四点之间的长时通话效果尤其稳定。</p>
+  <p class="margin-note">具体原因尚在分析中，因此请各位按照原有流程执行即可。</p>
 
-  <h2 class="sec">值班 · 第九夜</h2>
-  <p>凌晨那通结束后，我坐在工位上没动。耳机还热的。她的今天留在我这儿了，可我的今天不知道去哪儿了。</p>
-  <blockquote class="creed note blue">
-    <p>我们没有义务说服任何人继续活着。</p>
-    <p>我们也没有权力，替谁按下相反的开关。</p>
-    <p>我们只负责，在那句话被说出口的时候，别把耳朵拿开。</p>
-  </blockquote>
+  <h2 class="sec">04｜关于情绪记录</h2>
+  <p>每次通话结束后，请填写《来访者情绪记录表》，其中包括：</p>
+  <ul class="form-fields">
+    <li>通话时长</li><li>主要诉求</li><li>情绪变化</li>
+    <li>哭泣次数</li><li>沉默时间</li><li>结束通话时的状态</li>
+  </ul>
+  <p>请尽可能记录来访者的原话，尤其是他们谈到最痛苦经历时所使用的词语。系统会自动标记高频词汇，接线员无需进行额外整理。</p>
+  <p>如果某位来访者在一次通话中反复讲述同一段经历，请在备注栏填写“重复叙述”，并注明大致次数。</p>
 
-  <div class="curdle">
-  <h2 class="sec rot">失眠登记 · 连续第 <span class="glitch">██</span> 日</h2>
-  <p>又是天亮才睡着。闭上眼是别人的声音，睁开眼是自己的。分不清哪句是白天接到的，哪句是我本来就有的。</p>
-  <p class="rot">我开始怀疑，我们收下的那些痛苦，并没有被存进归档。它们存进了我们。归档只是<span class="redact">一个我们用来假装自己没事的抽屉</span>。</p>
+  <h2 class="sec">05｜关于员工状态</h2>
+  <p>长时间接听高强度来电可能导致疲劳、头痛、恶心、食欲变化以及短暂的情绪麻木，这些情况在接线工作中比较常见。</p>
+  <p>如果您在结束一通长时间通话后感到异常轻松，请不必担心。中心心理支持部门认为，这是压力释放后的正常反应。</p>
+  <p>如果这种轻松感持续到第二天，或者您开始期待某位来访者再次打来电话，请填写员工状态报告。</p>
+  <p><strong>请不要在报告中写“我想听他继续说”。</strong></p>
 
-  <h2 class="sec rot">值班 · 第 <span class="glitch">████</span> 夜</h2>
-  <p class="rot">今天的班表上有我的名字。可我不记得我报过这个班。接起来，对面是我自己的声音。它问我：还有人吗，这么晚了。</p>
-  <p class="mono">我按守则回答了：有。我在。你慢慢说。</p>
-  <p class="ghost">然后我们两个，谁都没有再说话。整整四十一分钟。</p>
+  <h2 class="sec">06｜关于夜间电话</h2>
+  <p>凌晨两点以后，接线室通常会保持较低的来电量。值班期间请勿关闭主线路，也不要因为长时间无人来电而离开岗位。</p>
+  <p>如果凌晨三点以后出现连续来电，请按照正常流程接听。</p>
+  <p>如果连续三通电话来自不同号码，而三名来访者都在讲述同一件事情，请不要主动指出这一点。完成通话后，在系统中选择“异常重复事件”，等待后台处理。</p>
+  <p>过去曾有接线员询问这种情况是否属于系统故障。</p>
+  <p>技术部门确认：<strong>线路运行正常。</strong></p>
 
-  <p class="glitch">[本页此后段落无法读取]</p>
-  <p><span class="blank" style="min-width:70%"></span></p>
-  <p><span class="blank" style="min-width:40%"></span> 我们没有 <span class="blank" style="min-width:30%"></span> 义务 <span class="blank" style="min-width:45%"></span></p>
-  </div>
+  <h2 class="sec">07｜关于来访者信息</h2>
+  <p>中心严格保护来访者隐私，接线员不得主动搜索来访者的姓名、住址、社交账号或其他个人资料，也不要尝试在通话结束后联系他们。</p>
+  <p>如果来访者主动告诉您自己的姓名，请正常记录。</p>
+  <p>如果对方第二次来电时，您已经记住了他的姓名、声音和故事，请不要表现出来。根据员工培训，这种情况下保持适当的职业距离有助于保护双方。</p>
+  <p>如果您发现自己开始期待某一个号码亮起，请申请调班。</p>
+  <p><strong>我们很少拒绝这种申请。</strong></p>
 
-  <div class="panel mono">
-    <p>交接备注：如果你读到这里还坐得住，那你比我强。</p>
-    <p>如果你已经开始分不清哪句话是自己的，到 <a href="specimen_room.html"><img class="mi" src="icons/largeicons/Resume.png" alt="">标本室</a> 去，那里存着一个还没被反噬掉的人的档案。</p>
+  <h2 class="sec">08｜关于员工餐</h2>
+  <p>值班超过六小时的员工可以领取夜间工作餐。员工餐由中心统一供应，请勿将食物带出餐厅，也不要询问供应商信息。</p>
+  <p>部分员工反映，连续值夜班后食欲会出现明显变化，例如对甜食、肉类或某些带有特殊气味的食物失去兴趣。这属于个人情况，无需向人事部门报告。</p>
+  <p>但如果您发现自己在接听长时通话以后明显感到饥饿，并且这种饥饿会随着通话持续时间增加而减轻，请暂时停止使用员工餐，联系值班主管。</p>
+  <p><strong>请记住，饥饿感消失并不代表您已经吃过东西。</strong></p>
+
+  <h2 class="sec">09｜关于“已完成”状态</h2>
+  <p>来访者档案在通话结束后通常会显示“已结束”。少数档案会在后台审核后变更为“已完成”，这种情况无需接线员进行处理。</p>
+  <p>请不要尝试查看“已完成”档案的后续记录。</p>
+  <p>中心曾经开放过相关权限，后来发现部分员工会因为过度关注来访者的后续情况而产生工作压力，因此该权限已经取消。</p>
+  <p>如果您发现自己负责的来访者连续几天都没有再次来电，系统却显示他的档案已经“完成”，请保持正常工作。</p>
+  <p><strong>这意味着您已经完成了自己的部分。</strong></p>
+
+  <h2 class="sec">10｜关于离职</h2>
+  <p>接线员可以随时向人事部门提交离职申请，中心不会阻止任何员工离开。</p>
+  <p>离职前需要完成最后一次交接，包括未结束通话、待处理档案以及尚未完成的情绪记录。</p>
+  <p>如果您在提交离职申请后，仍然在下班时间听见自己的工作电话响起，请按以下流程处理：</p>
+  <ol class="clause">
+    <li>如果电话响了三次以后停止，请将这件事情忘掉。</li>
+    <li>如果电话响了四次，请联系主管。</li>
+    <li>如果电话第五次响起时，您听见了某位曾经接听过的来访者正在哭，请<strong>不要告诉任何人您已经认识这个声音</strong>。</li>
+  </ol>
+
+  <h2 class="sec">11｜给值班主管的说明</h2>
+  <dl class="qa">
+    <dt>如果接线员询问“我们究竟帮助了多少人”</dt>
+    <dd>请告诉他们中心不会用单纯的数字衡量工作成果。</dd>
+    <dt>如果接线员继续追问“那些已经去世的人呢”</dt>
+    <dd>请告诉他们每个人的选择都应该得到尊重。</dd>
+    <dt>如果接线员问“为什么他们的通话记录会被保留这么久”</dt>
+    <dd>请告诉他们这是为了长期研究和改进服务。</dd>
+    <dt>如果接线员问“为什么有些记录每天都会增加新的内容”</dt>
+    <dd>请停止回答，并通知运营部。</dd>
+  </dl>
+  <p>运营部会负责处理。</p>
+
+  <h2 class="sec">12｜如果您已经发现不对劲</h2>
+  <p>您可能会在某一天突然意识到，这里似乎没有人真正关心那些来电者最后去了哪里。</p>
+  <p>您会发现，培训会议总在强调“完整表达”，绩效表总在统计“有效倾诉时长”，后台系统会特别保存哭泣、沉默和重复叙述的记录，而那些真正能够让一个人离开危机状态的方法，反倒很少出现在考核项目里。</p>
+  <p>请不要因此感到不安。</p>
+  <div class="closing">
+  <p>这些数据对于中心非常重要。</p>
+  <p>他们喜欢听见人痛苦的时候说些什么。</p>
+  <p>他们尤其喜欢那些已经说过很多遍、却仍然愿意继续说下去的人。</p>
+  <p>至于为什么，接线员没有必要知道。</p>
+  <p class="beat">您只需要继续接电话。</p>
+  <p class="beat">继续让他们说。</p>
+  <p class="beat">继续把电话保持在通话状态。</p>
   </div>
 
   <footer class="foot">
-    internal / operator_notes · 页码从第九夜之后开始跳号<br>
-    <span class="faint">我们把您的悲伤晒在窗台上，第二天它长高了一点。</span>
+    internal / operator handbook · 接线部门专用<br>
+    <span class="faint">本手册最终解释权归中心所有。</span>
   </footer>
 
 </div>
