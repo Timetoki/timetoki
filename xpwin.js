@@ -533,7 +533,7 @@
 
     function table(sp){
       var picks=[], used={};
-      function draw(){ var i; do{ i=Math.floor(Math.random()*DECK.length); }while(used[i]); used[i]=1; return DECK[i]; }
+      function draw(){ var i; do{ i=Math.floor(Math.random()*DECK.length); }while(used[i]); used[i]=1; return {card:DECK[i], reversed:Math.random()<0.5}; }
       dbody.innerHTML=
         '<button class="game-back">← 换牌阵</button>'+
         '<div class="tarot-title">'+sp.name+'　<span class="muted" style="font-size:12px">'+sp.desc+'</span></div>'+
@@ -556,10 +556,10 @@
       cards.forEach(function(c){
         c.addEventListener('click',function(){
           if(c.classList.contains('flipped')) return;
-          var card=draw();
-          c.querySelector('.front').innerHTML='<img src="pictures/Cards/'+encodeURIComponent(card.f)+'" alt="'+card.n+'" onerror="this.style.opacity=0">';
+          var d=draw(), card=d.card, rev=d.reversed;
+          c.querySelector('.front').innerHTML='<img class="'+(rev?'card-reversed':'')+'" src="pictures/Cards/'+encodeURIComponent(card.f)+'" alt="'+card.n+'" onerror="this.style.opacity=0">';
           c.classList.add('flipped');
-          c.querySelector('.tinfo').innerHTML='<div class="tname">'+card.n+'</div><div class="tread">'+card.r+'</div>';
+          c.querySelector('.tinfo').innerHTML='<div class="tname">'+card.n+'·'+(rev?'逆位':'正位')+'</div><div class="tread">'+(rev?card.rv:card.r)+'</div>';
           revealed++;
           if(revealed>=total){ dbody.querySelector('.tarot-again').style.display='block'; }
         });
