@@ -615,7 +615,7 @@ body.desktop .row3 > .xpwin{ height:auto; display:flex; flex-direction:column; }
 @media (max-width:900px){
   /* 唱片机竖着占左半，两张 side 图占右半上下各半，公告栏/留言墙各占一整行 */
   body.desktop .row3{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:minmax(150px,44%) 1fr;
     grid-template-rows:1fr 1fr auto auto;
     grid-template-areas:
       "player img1"
@@ -752,12 +752,12 @@ body.desktop .bar-wall .chips.messy .chip:nth-child(15){ transform:rotate(-2deg)
   flex:1; display:flex; align-items:center; justify-content:center; padding:8px; }
 body.desktop .p-player{ height:100%; }
 body.desktop .p-player .player{ width:100%; }
-body.desktop .p-player .vinyl{ width:120px; height:120px; margin:6px auto 12px; }
+body.desktop .p-player .vinyl{ width:clamp(70px,80%,120px); height:auto; aspect-ratio:1/1; margin:6px auto 12px; }
 body.desktop .p-player .scr{ margin:4px 0 6px; }
 body.desktop .p-player .prow{ margin:2px 0 6px; }
 body.desktop .p-player .vrow{ margin:4px 2px 0; }
-body.desktop .p-player .pctrls{ gap:8px; }
-body.desktop .p-player .pctrls button{ width:34px; height:34px; }
+body.desktop .p-player .pctrls{ gap:clamp(4px,3%,8px); flex-wrap:wrap; }
+body.desktop .p-player .pctrls button{ width:clamp(26px,22%,34px); height:clamp(26px,22%,34px); font-size:clamp(12px,4vw,16px); }
 
 .player .pmeta{ font-size:12px; color:var(--ink-soft); line-height:1.7; margin:4px 0 8px; text-align:center; }
 .player .pmeta span{ color:var(--ink); }
@@ -1175,3 +1175,29 @@ a.specimen-card:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(44
 .pf-gate-msg{ font-family:var(--mono); font-size:12px; color:#8a8577; margin-top:10px; }
 
 .pf-empty{ font-family:var(--mono); font-size:13px; color:#8a8577; text-align:center; padding:40px 0; }
+
+/* 联系弹窗：病历白 / 医学内刊风格小卡片 */
+.contact-card{ position:relative; background:#fff; border:1px solid #dcdce0; border-radius:6px;
+  padding:30px 26px 26px; margin:8px auto; max-width:360px;
+  font-family:"Microsoft YaHei","PingFang SC","Heiti SC",system-ui,sans-serif; color:#1c1c1e; }
+.contact-card .cc-stamp{ position:absolute; top:14px; right:14px;
+  font-family:"Courier New",var(--mono),monospace; font-size:11px; letter-spacing:2px; color:#a33;
+  border:1.5px solid #a33; border-radius:2px; padding:3px 7px; transform:rotate(4deg); opacity:.8; }
+.contact-card .cc-row{ display:flex; flex-direction:column; gap:4px;
+  margin:30px 0 14px; padding-bottom:14px; border-bottom:1px solid #e2e2e6; }
+.contact-card .cc-k{ font-family:"Courier New",var(--mono),monospace; font-size:11px; color:#999; letter-spacing:2px; }
+.contact-card .cc-v{ font-size:16px; font-weight:700; color:#111; word-break:break-all; }
+.contact-card .cc-note{ font-size:13.5px; color:#555; line-height:1.7; margin:0 0 20px; }
+.contact-card .cc-btn{ display:block; text-align:center; font-family:inherit; font-weight:700; font-size:14px;
+  color:#fff; background:#8a1620; border-radius:3px; padding:11px 22px; text-decoration:none;
+  letter-spacing:1px; transition:background .15s ease; }
+.contact-card .cc-btn:hover{ background:#a33; }
+
+/* 音乐弹窗：曲目单 */
+.playlist-card{ padding:4px 2px; }
+.playlist-card .pl-title{ font-weight:700; font-size:15px; color:var(--ink); margin:2px 0 12px; }
+.playlist-card .pl-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.playlist-card .pl-list li{ display:flex; flex-direction:column; gap:2px;
+  background:#fff; border:1px solid #e8e4da; border-radius:8px; padding:9px 12px; }
+.playlist-card .pl-name{ font-weight:700; font-size:14px; color:var(--ink); }
+.playlist-card .pl-sub{ font-family:var(--mono); font-size:11px; color:#8a8577; }

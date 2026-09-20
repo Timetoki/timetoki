@@ -166,6 +166,7 @@
 
   /* 供游戏/占卜调用：打开暂停、关闭恢复到原状态 */
   window.__player = {
+    playlist:PLAYLIST,
     _resume:false,
     pauseFor:function(){ this._resume = !audio.paused; if(!audio.paused) audio.pause(); },
     resume:function(){ if(this._resume){ var p=audio.play(); if(p&&p.catch)p.catch(function(){}); } this._resume=false; }

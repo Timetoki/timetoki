@@ -661,6 +661,45 @@
       return;
     }
 
+    /* 联系：小型病历风格卡片，展示邮箱 + 一键发邮件 */
+    if(a.id==='nav-contact'){
+      e.preventDefault();
+      document.getElementById('xpmtitle').textContent='联系';
+      document.getElementById('xpmico').src='icons/largeicons/Contact.png';
+      var cbody=document.getElementById('xpmbody');
+      cbody.innerHTML=
+        '<div class="contact-card">'+
+          '<span class="cc-stamp">联系方式</span>'+
+          '<div class="cc-row"><span class="cc-k">EMAIL</span><span class="cc-v">TimeChiang3@gmail.com</span></div>'+
+          '<p class="cc-note">可通过此邮箱发送邮件与我联系。</p>'+
+          '<a class="cc-btn" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=TimeChiang3@gmail.com" target="_blank" rel="noopener">发送邮件</a>'+
+        '</div>';
+      modal.classList.remove('game');
+      modal.classList.add('open'); mask.classList.add('open');
+      return;
+    }
+
+    /* 音乐：只读展示唱片机播放列表 */
+    if(a.id==='nav-music'){
+      e.preventDefault();
+      document.getElementById('xpmtitle').textContent='音乐';
+      document.getElementById('xpmico').src='icons/largeicons/Winamp.png';
+      var mbody=document.getElementById('xpmbody');
+      var list=(window.__player && window.__player.playlist)||[];
+      mbody.innerHTML=
+        '<div class="playlist-card">'+
+          '<div class="pl-title">唱片机曲目单</div>'+
+          '<ul class="pl-list">'+
+            list.map(function(t){
+              return '<li><span class="pl-name">'+t.title+'</span><span class="pl-sub">'+(t.artist||'未知')+' · '+(t.album||'未知')+'</span></li>';
+            }).join('')+
+          '</ul>'+
+        '</div>';
+      modal.classList.remove('game');
+      modal.classList.add('open'); mask.classList.add('open');
+      return;
+    }
+
     var href=a.getAttribute('href')||'';
     if(/^https?:/i.test(href)) return;
     var base=href.split('/').pop();
