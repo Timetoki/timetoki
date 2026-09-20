@@ -757,7 +757,7 @@ body.desktop .p-player .scr{ margin:4px 0 6px; }
 body.desktop .p-player .prow{ margin:2px 0 6px; }
 body.desktop .p-player .vrow{ margin:4px 2px 0; }
 body.desktop .p-player .pctrls{ gap:clamp(4px,3%,8px); flex-wrap:wrap; }
-body.desktop .p-player .pctrls button{ width:clamp(26px,22%,34px); height:clamp(26px,22%,34px); font-size:clamp(12px,4vw,16px); }
+body.desktop .p-player .pctrls button{ width:clamp(26px,20%,34px); height:auto; aspect-ratio:1/1; font-size:clamp(12px,4vw,16px); }
 
 .player .pmeta{ font-size:12px; color:var(--ink-soft); line-height:1.7; margin:4px 0 8px; text-align:center; }
 .player .pmeta span{ color:var(--ink); }
@@ -1036,8 +1036,6 @@ a.specimen-card:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(44
   height:143px;
   overflow:auto;
 }
-
-.sqbox{ width:118px; flex:0 0 118px; align-self:stretch}
 
 /* ★ 公告栏：框体卡死 + 内容滚动 */
 .bar-board .xp-b{
