@@ -1138,17 +1138,22 @@ a.specimen-card:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(44
 .pf-card-hero .pf-card-desc{ font-size:15px; line-height:1.7; }
 .pf-card-cta{ margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--ink); }
 
-.pf-article-list{ display:flex; flex-direction:column; gap:8px; }
-.pf-article-row{ display:flex; align-items:center; justify-content:space-between; gap:10px;
+.pf-article-list{ display:flex; flex-direction:column; gap:10px; }
+.pf-article-row{ display:flex; flex-direction:column; gap:6px;
   width:100%; background:#fff; border:1px solid #d8d4cc; border-radius:8px;
   padding:12px 16px; cursor:pointer; transition:background .15s ease; }
 .pf-article-row:hover{ background:#f8f7f4; }
 .pf-article-row.open{ border-color:var(--ink); }
-.pf-article-main{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.pf-article-line1{ display:flex; align-items:center; gap:8px; }
+.pf-article-ico{ width:16px; height:16px; flex:none; }
 .pf-article-title{ font-weight:700; font-size:14px; color:var(--ink); }
+.pf-article-meta{ font-family:var(--mono); font-size:11px; color:#8a8577; margin-left:auto; }
+.pf-article-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+.pf-tag{ font-family:var(--mono); font-size:11px; color:#7d7a92; background:#f1effa;
+  border:1px solid #e0ddf0; border-radius:5px; padding:1px 7px; }
 .pf-article-note{ font-family:var(--mono); font-size:11px; color:#8a8577;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.pf-lock{ flex:none; font-size:14px; }
+.pf-lock{ flex:none; font-size:13px; }
 
 /* 点哪篇，全文就直接铺在那一行下面，不用跑到列表最底下 */
 .pf-article-reader{ background:#fff; border:1px solid #d8d4cc; border-radius:8px;
