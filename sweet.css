@@ -1149,16 +1149,18 @@ a.specimen-card:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(44
 .pf-article-ico{ width:16px; height:16px; flex:none; }
 .pf-article-title{ font-weight:700; font-size:14px; color:var(--ink); }
 .pf-article-meta{ font-family:var(--mono); font-size:11px; color:#8a8577; margin-left:auto; }
-.pf-article-tags{ display:flex; flex-wrap:wrap; gap:6px; }
-.pf-tag{ font-family:var(--mono); font-size:11px; color:#7d7a92; background:#f1effa;
-  border:1px solid #e0ddf0; border-radius:5px; padding:1px 7px; }
+.pf-article-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+.pf-tag{ font-family:var(--mono); font-size:11px; color:#9a968c; }
 .pf-article-note{ font-family:var(--mono); font-size:11px; color:#8a8577;
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .pf-lock{ flex:none; font-size:13px; }
 
-/* 点哪篇，全文就直接铺在那一行下面，不用跑到列表最底下 */
-.pf-article-reader{ background:#fff; border:1px solid #d8d4cc; border-radius:8px;
-  padding:16px 18px; margin:-2px 0 8px; }
+/* 点哪篇，全文就直接铺在那一行下面，不用跑到列表最底下；用 max-height 做展开/收起动画 */
+.pf-article-reader{ background:#fff; border:1px solid transparent; border-radius:8px;
+  margin:-2px 0 0; overflow:hidden; max-height:0; opacity:0;
+  transition:max-height .35s ease, opacity .25s ease, margin .35s ease, border-color .35s ease; }
+.pf-article-reader.open{ max-height:4000px; opacity:1; margin:-2px 0 8px; border-color:#d8d4cc; }
+.pf-reader-body{ padding:16px 18px; }
 .pf-reader-title{ font-weight:700; font-size:20px; text-align:left; margin-bottom:12px; }
 .pf-reader-text{ font-family:var(--body); font-size:14px; line-height:1.9; color:var(--ink);
   white-space:pre-wrap; word-break:break-word; max-height:70vh; overflow:auto; margin:0; }

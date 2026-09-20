@@ -262,10 +262,10 @@
     /* 文字：一行一篇卡片，锁住的要先核验密码才能懒加载 txt 文件 */
     var ARTICLES = [
       { file:'【一阳】尾戒.txt', full:'【一阳】尾戒', title:'尾戒', note:'无情人作对孤雏', date:'2023-06-12', words:11328, tags:['KPL','电竞RPS','一阳'], locked:false },
+      { file:'【猫兰】Just like donuts.txt', full:'【猫兰】Just like donuts', title:'Just like donuts', note:'我生吞活剥，吃下了它蓝色的内脏。', date:'2023-12-09', words:8132, tags:['LCK','电竞RPS','猫兰'], locked:false },
       { file:'【xunelk】记瑞士轮的一件小事.txt', full:'【xunelk】记瑞士轮的一件小事', title:'记瑞士轮的一件小事', note:'只有橘子花盛开到腐烂而又生长出蓬勃薰衣草的味道。', date:'2023-10-20', words:4255, tags:['LCK','电竞RPS','xunelk'], locked:true },
       { file:'【兮星】海难.txt', full:'【兮星】海难', title:'海难', note:'像冰冷的海水，在一场海难中沸腾。', date:'2023-05-09', words:7015, tags:['KPL','电竞RPS','兮星'], locked:true },
-      { file:'【宁蓝】直到夏末。.txt', full:'【宁蓝】直到夏末。', title:'直到夏末。', note:'他们在闷热的夏日里相拥。', date:'2023-06-02', words:8408, tags:['LPL','电竞RPS','宁蓝'], locked:true },
-      { file:'【猫兰】Just like donuts.txt', full:'【猫兰】Just like donuts', title:'Just like donuts', note:'我生吞活剥，吃下了它蓝色的内脏。', date:'2023-12-09', words:8132, tags:['LCK','电竞RPS','猫兰'], locked:true }
+      { file:'【宁蓝】直到夏末。.txt', full:'【宁蓝】直到夏末。', title:'直到夏末。', note:'他们在闷热的夏日里相拥。', date:'2023-06-02', words:8408, tags:['LPL','电竞RPS','宁蓝'], locked:true }
     ];
     var GATE_PASSWORD = '1010';
     var unlockedFiles = {};
@@ -289,7 +289,12 @@
     }
 
     function closeOpen(){
-      if(openPanel){ openPanel.remove(); openPanel = null; }
+      if(openPanel){
+        var p = openPanel;
+        p.classList.remove('open');
+        setTimeout(function(){ p.remove(); }, 360);
+        openPanel = null;
+      }
       if(openRow){ openRow.classList.remove('open'); openRow = null; }
     }
     function showText(panel, article){
@@ -334,9 +339,13 @@
           closeOpen();
           var panel = document.createElement('div');
           panel.className = 'pf-article-reader';
+          var body = document.createElement('div');
+          body.className = 'pf-reader-body';
+          panel.appendChild(body);
           rowEl.insertAdjacentElement('afterend', panel);
-          if(article.locked && !unlockedFiles[article.file]){ showGate(panel, article); }
-          else{ showText(panel, article); }
+          if(article.locked && !unlockedFiles[article.file]){ showGate(body, article); }
+          else{ showText(body, article); }
+          requestAnimationFrame(function(){ panel.classList.add('open'); });
           rowEl.classList.add('open');
           openRow = rowEl; openPanel = panel;
         });
