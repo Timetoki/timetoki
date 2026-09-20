@@ -240,17 +240,32 @@
     }
 
     var ARTICLES=[
-      { file:'【一阳】尾戒.txt', full:'【一阳】尾戒', locked:false },
-      { file:'【xunelk】记瑞士轮的一件小事.txt', full:'【xunelk】记瑞士轮的一件小事', locked:true },
-      { file:'【兮星】海难.txt', full:'【兮星】海难', locked:true },
-      { file:'【宁蓝】直到夏末。.txt', full:'【宁蓝】直到夏末。', locked:true },
-      { file:'【猫兰】Just like donuts.txt', full:'【猫兰】Just like donuts', locked:true }
+      { file:'【一阳】尾戒.txt', full:'【一阳】尾戒', title:'尾戒', note:'无情人作对孤雏', date:'2023-06-12', words:11328, tags:['KPL','电竞RPS','一阳'], locked:false },
+      { file:'【xunelk】记瑞士轮的一件小事.txt', full:'【xunelk】记瑞士轮的一件小事', title:'记瑞士轮的一件小事', note:'只有橘子花盛开到腐烂而又生长出蓬勃薰衣草的味道。', date:'2023-10-20', words:4255, tags:['LCK','电竞RPS','xunelk'], locked:true },
+      { file:'【兮星】海难.txt', full:'【兮星】海难', title:'海难', note:'像冰冷的海水，在一场海难中沸腾。', date:'2023-05-09', words:7015, tags:['KPL','电竞RPS','兮星'], locked:true },
+      { file:'【宁蓝】直到夏末。.txt', full:'【宁蓝】直到夏末。', title:'直到夏末。', note:'他们在闷热的夏日里相拥。', date:'2023-06-02', words:8408, tags:['LPL','电竞RPS','宁蓝'], locked:true },
+      { file:'【猫兰】Just like donuts.txt', full:'【猫兰】Just like donuts', title:'Just like donuts', note:'我生吞活剥，吃下了它蓝色的内脏。', date:'2023-12-09', words:8132, tags:['LCK','电竞RPS','猫兰'], locked:true }
     ];
     var GATE_PASSWORD='1010';
     var unlockedFiles={};
     var openRow=null, openPanel=null;
 
     var articleList=scope.querySelector('#pfArticleList');
+    if(articleList && !articleList.dataset.built){
+      articleList.dataset.built='1';
+      articleList.innerHTML=ARTICLES.map(function(a){
+        return '<div class="pf-article-row">'+
+          '<div class="pf-article-line1">'+
+            '<img class="pf-article-ico" src="icons/largeicons/file.png" alt="">'+
+            '<span class="pf-article-title">'+a.title+'</span>'+
+            '<span class="pf-article-meta">'+a.date+' · '+(a.words?a.words+'字':'未完成')+'</span>'+
+            (a.locked?'<span class="pf-lock">🔒</span>':'')+
+          '</div>'+
+          '<div class="pf-article-tags">'+a.tags.map(function(t){ return '<span class="pf-tag">#'+t+'</span>'; }).join('')+'</div>'+
+          '<div class="pf-article-note">'+a.note+'</div>'+
+        '</div>';
+      }).join('');
+    }
 
     function closeOpen(){
       if(openPanel){ openPanel.remove(); openPanel=null; }
@@ -262,7 +277,7 @@
         '<pre class="pf-reader-text">准备上菜……</pre>';
       var pre=panel.querySelector('.pf-reader-text');
       fetch(encodeURI('pruducts/txts/'+article.file)).then(function(r){ return r.text(); }).then(function(t){
-        pre.textContent=t;
+        pre.textContent=t.trim() ? t : '这道菜还没做完，请稍后再来。';
       }).catch(function(){ pre.textContent='数据已???完好，请刷新。'; });
     }
     function showGate(panel, article){
@@ -559,7 +574,7 @@
           var d=draw(), card=d.card, rev=d.reversed;
           c.querySelector('.front').innerHTML='<img class="'+(rev?'card-reversed':'')+'" src="pictures/Cards/'+encodeURIComponent(card.f)+'" alt="'+card.n+'" onerror="this.style.opacity=0">';
           c.classList.add('flipped');
-          c.querySelector('.tinfo').innerHTML='<div class="tname">'+card.n+'·'+(rev?'逆位':'正位')+'</div><div class="tread">'+(rev?card.rv:card.r)+'</div>';
+          c.querySelector('.tinfo').innerHTML='<div class="tname">'+card.n+'<span class="torient">·'+(rev?'逆位':'正位')+'</span></div><div class="tread">'+(rev?card.rv:card.r)+'</div>';
           revealed++;
           if(revealed>=total){ dbody.querySelector('.tarot-again').style.display='block'; }
         });
