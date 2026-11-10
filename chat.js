@@ -163,11 +163,6 @@
   function afterFirstPain(){
     function go(){
       if(busy){ setTimeout(go, 400); return; }
-      greeted=true;
-      qq.classList.add('open'); qq.classList.remove('min');
-      launch.style.display='none';
-      unread=0; renderBadge();
-      resetIdle();
       busy=true;
       addHer('你还好吗？');
       setTimeout(function(){
