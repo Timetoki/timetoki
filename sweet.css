@@ -1067,9 +1067,13 @@ a.specimen-card:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(44
 .hotline-inputrow input{ flex:1; font-family:var(--body); font-size:14px;
   border:1px solid #d8d4cc; border-radius:8px; padding:8px 10px; background:#fff; color:var(--ink); }
 .hotline-inputrow input:focus{ outline:none; border-color:#b9b3a6; }
+.hotline-inputrow input:disabled{ background:#efeee9; color:#8a8577; cursor:not-allowed; }
 .hotline-inputrow button{ font-family:var(--body); font-weight:700; cursor:pointer;
   border:1px solid #d8d4cc; border-radius:8px; background:#f8f7f4; color:var(--ink); padding:8px 16px; }
 .hotline-inputrow button:hover{ background:#eeece6; }
+.hotline-inputrow button:disabled,
+.hotline-inputrow button:disabled:hover{
+  background:#111; color:#6a6a6a; border-color:#111; cursor:not-allowed; }
 .hotline-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .hotline-dial{ font-family:var(--body); font-weight:700; cursor:pointer;
   border:1px solid var(--ink); border-radius:8px; background:#fff; color:var(--ink);

@@ -65,12 +65,12 @@
     if (unread>0){ badge.textContent = unread>99?'99+':unread; badge.classList.add('show'); }
     else { badge.classList.remove('show'); }
   }
-  function typing(cb){
+  function typing(cb, waitMs){
     stat.textContent='对方正在输入…';
     var t=document.createElement('div'); t.className='msg her typing';
     t.innerHTML='<div class="id">Time</div><div class="t">正在输入…</div>';
     body.appendChild(t); scroll();
-    var wait = 900 + Math.random()*900;
+    var wait = waitMs!=null ? waitMs : (900 + Math.random()*900);
     setTimeout(function(){ t.remove(); stat.textContent='在线'; cb(); }, wait);
   }
   /* 依次发送多句：先一句，隔 5–6 秒下一句 */
@@ -159,4 +159,25 @@
     });
     window.addEventListener('mouseup', function(){ dragging=false; });
   })();
+
+  function afterFirstPain(){
+    function go(){
+      if(busy){ setTimeout(go, 400); return; }
+      greeted=true;
+      qq.classList.add('open'); qq.classList.remove('min');
+      launch.style.display='none';
+      unread=0; renderBadge();
+      resetIdle();
+      busy=true;
+      addHer('你还好吗？');
+      setTimeout(function(){
+        typing(function(){
+          addHer('我都知道了。');
+          busy=false;
+        }, 2000);
+      }, 400);
+    }
+    go();
+  }
+  window.TimeChat = { afterFirstPain: afterFirstPain };
 })();
